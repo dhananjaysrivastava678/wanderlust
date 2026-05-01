@@ -108,12 +108,13 @@ main()
 }).catch(err => console.log(err));
 
 async function main() {
-    await mongoose.connect(dbUrl, {
-        serverSelectionTimeoutMS: 5000,
-    });
+    await mongoose.connect('mongodb://127.0.0.1:27017/applist');
 }
 
-// 'mongodb://127.0.0.1:27017/applist'
+// 
+// dbUrl, {
+//         serverSelectionTimeoutMS: 5000,
+//     }
 // app.get("/listing",async (req,res)=>{
 //     let samplelisting =new List({
 //         title:"this is my new farmfouse",

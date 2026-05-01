@@ -51,26 +51,26 @@
             </div>
 
             <div class="mb-3 col-md-8">
-                <label for="location" class="form-label">Location</label>
-                <input name="List[location]" 
-                value="<%=data.location %>" 
-                type="text"
-                class="form-control"
-                required />
-                <div class="invalid-feedback">please enter a valid location</div>
-                <div class="valid-feedback">location updated successfully</div>
-            </div>
-            </div>
-
-            <div class="mb-3">
                 <label for="country" class="form-label">Country</label>
                 <input name="List[country]" 
                 value="<%=data.country %>" 
                 type="text"
+                class="form-control"
+                required />
+                <div class="invalid-feedback">please enter a valid Country</div>
+                <div class="valid-feedback">country updated successfully</div>
+            </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="country" class="form-label">Location</label>
+                <input name="List[location]" 
+                value="<%=data.location %> "
+                type="text"
                 class="form-control" 
                 required/>
-                <div class="invalid-feedback">please enter a valid country</div>
-                 <div class="valid-feedback">country updated successfully</div>
+                <div class="invalid-feedback">please enter a valid Location</div>
+                 <div class="valid-feedback">location updated successfully</div>
             </div>
                 <button class="btn btn-dark mt-3">save changes</button>
         </form>

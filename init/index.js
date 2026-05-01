@@ -16,29 +16,29 @@ async function main() {
 await mongoose.connect(process.env.ATLASDB_URL);
 }
 
-// const initdb = async ()=>{
-//     await Listing.deleteMany({});
-//     initdata.data= initdata.data.map((obj)=>({...obj,owner:'69ed4e494b229a7daf839bb8'}));
-//     await Listing.insertMany(initdata.data);
-//     console.log("data was initialized");
-// }
-const initdb = async () => {
+const initdb = async ()=>{
     await Listing.deleteMany({});
-
-    // ✅ loop each listing and fetch coordinates
-    for (let obj of initdata.data) {
-        let response = await geocodingClient.forwardGeocode({
-            query: obj.location,
-            limit: 1
-        }).send();
-
-        obj.geometry = response.body.features[0].geometry;  // ✅ add geometry
-        obj.owner = '69ed4e494b229a7daf839bb8';
-    }
-
+    initdata.data= initdata.data.map((obj)=>({...obj,owner:'69ed4e494b229a7daf839bb8'}));
     await Listing.insertMany(initdata.data);
-    console.log("data was initialized with coordinates");
+    console.log("data was initialized");
 }
+// const initdb = async () => {
+//     await Listing.deleteMany({});
+
+//     // ✅ loop each listing and fetch coordinates
+//     for (let obj of initdata.data) {
+//         let response = await geocodingClient.forwardGeocode({
+//             query: obj.location,
+//             limit: 1
+//         }).send();
+
+//         obj.geometry = response.body.features[0].geometry;  // ✅ add geometry
+//         obj.owner = '69ed4e494b229a7daf839bb8';
+//     }
+
+//     await Listing.insertMany(initdata.data);
+//     console.log("data was initialized with coordinates");
+// }
 
 initdb();
 
