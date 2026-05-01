@@ -1,0 +1,82 @@
+<% layout("layout/boilerplate") %>
+<body>
+    <br><br>
+    <div class="row">
+        <div class="col-8 offset-2">
+            <h2>Cretae a New Listing </h2>
+    
+    <form method="post" action="/listing" novalidate class="needs-validation">
+        <div class="mb-3">
+            <label for="title" class="form-label">Title</label>
+            <input 
+            type="text" 
+            name="List[title]" 
+            placeholder="Add a catchy title" 
+            class="form-control"
+            required/>
+            <div class="valid-feedback">title filled successfully </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <textarea 
+            type="text" 
+            name="List[description]" 
+            placeholder="enter the description" 
+            class="form-control"
+            required></textarea>
+            <div class="invalid-feedback">plese enter small description</div>
+             <div class="valid-feedback">description filled successfully </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="image" class="form-label">Image</label>
+            <input 
+            type="text" 
+            name="List[image]" 
+            placeholder="enter the url of the image"
+            class="form-control"/>
+             <div class="valid-feedback">url filled successfully </div>
+        </div>
+        
+        <div class="row">
+            <div class="mb-3 col-md-4">
+                <label for="price" class="form-label">Price</label>
+                <input 
+                name="List[price]" 
+                placeholder="enter the price"
+                class="form-control"
+                required/>
+                <div class="invalid-feedback">please enter a valid price</div>
+                 <div class="valid-feedback">price entered successfully </div>
+            </div>
+    
+            <div class="mb-3 col-md-8">
+                <label for="country" class="form-label">Country</label>
+                <input 
+                type="text" 
+                name="List[country]" 
+                placeholder="enter your country" 
+                class="form-control"
+                required/>
+                <div class="invalid-feedback">please enter a valid country</div>
+                 <div class="valid-feedback">country filled successfully </div>
+            </div>
+        </div>
+        
+        <div class="mb-3">
+            <label for="location" class="form-label">Location</label>
+            <input 
+            type="text" 
+            name="List[location]" 
+            placeholder="enter your location" 
+            class="form-control"
+            required/>
+            <div class="invalid-feedback">please enter a valid location</div>
+             <div class="valid-feedback">location filled successfully </div>
+        </div>
+        <button class="btn btn-dark mt-3">Add</button>
+    </form>
+</body>
+</div>
+</div>

@@ -1,0 +1,89 @@
+<% layout("layout/boilerplate") %>
+<script>
+    let mapToken = "<%= process.env.MAP_TOKEN %>";
+     let coordinates = <%- JSON.stringify(data.geometry.coordinates) %>;
+</script> 
+
+<body>
+    <div class="row mt-2">
+        <div class="col-8 offset-3">
+            <h1><b><%=data.title %></b></h1>
+        </div>
+        <div class="card card-listing col-6 offset-3 show-card">
+      <img src="<%=data.image %>" class="card-img-top show-img" alt="listing-image">
+      <div class="card-body">
+        <p class="card-text"> <i>ownedby: <%=data.owner.username  %></i></p>
+        <p class="card-text">"<%=data.description %>"</p>
+        <p class="card-text">&#8377; <%=data.price.toLocaleString("en-IN") %></p>
+        <p class="card-text"><%=data.location %></p>
+        <p class="card-text"><%=data.location %><%=data.country %>
+      </div>
+    </div>
+    <br>
+
+    <% if(currUser && currUser._id.equals(data.owner._id)) { %> 
+    <div class="btns col-6 offset-3 mt-2 ">
+        <form method="get" action="/listing/<%=data._id%>/edit"><button class="btn ">edit</button></form> &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;
+        <form method="post" action="/listing/<%=data._id%>/?_method=DELETE"><button class="btn">delete</button></form>
+    </div>
+    <% } %>
+
+    <div class="col-8 offset-3 mb-3">
+        <% if(currUser){ %>  
+            <hr>
+            <h4>Leave The Review</h4>
+            <form  action="/listing/<%=data._id%>/reviews" method="post"  novalidate class="needs-validation">
+                <div class="mb-3 mt-3">
+                    <label for="rating" class="form-label">Rating</label>
+                    <input type="range" min="1" max="5" id="rating" name="review[rating]">
+                </div>
+                <div class="mt-3 mb-3">
+                    <label for="comment" class="form-label">Comment</label>
+                    <textarea name="review[comment]" id="comment" rows="5" cols="30" class="form-control" required></textarea>
+                    <div class="invalid-feedback">please add some valid comment</div>
+                </div>
+                <button class="btn btn-outline-d-+rk">Submit</button>
+            </form>
+            
+        <% } %>
+        <hr> 
+        <% if(data.reviews.length >0) { %>
+        <div class="row">
+                <h4>Review of the user</h4>
+                
+                <%for(review of data.reviews) { %>
+                    <div class="col-5">
+                        <div class="card mb-3">
+                          <div class="card-body">
+                            <h5 class="card-title"><%= review.author.username %></h5>
+                             <h6> rating: <%=review.rating %></h6>
+                             <h6> comment: <%=review.comment %></h6>
+                         </div>
+                         <form method="post" class="mb-1" action="/listing/<%=data._id%>/reviews/<%=review._id %>?_method=DELETE" >
+                            <button type="submit" class="btn btn-primary">Delete</button>
+                         </form>
+                        </div>
+                    </div>
+                    <% } %>
+            </div>
+            <% } %>
+    </div>
+    </div>
+    <div class="row mt-2 mb-2 offset-3">
+        <h3>Located At</h3>
+        <div id="map"></div>
+    </div>
+        <!-- <script>
+            let mapToken ="<%= process.env.MAP_TOKEN %>"; 
+            console.log(mapToken);
+             mapboxgl.accessToken = mapToken;
+            const map = new mapboxgl.Map({
+            container: 'map', // container ID
+            center: [77.2090,28.6139], // starting position [lng, lat]. Note that lat must be set between -90 and 90
+            zoom: 9 // starting zoom
+            
+    });
+</script> -->
+<script src="/js/map.js"></script>
+
+</body>

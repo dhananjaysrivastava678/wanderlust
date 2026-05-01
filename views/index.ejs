@@ -1,0 +1,130 @@
+<% layout("layout/boilerplate") %>
+    <style>
+        #filters{
+            display: flex;
+            flex:wrap;
+            text-align: center;
+            align-items: center;
+        }
+        #filter{
+            margin-right: 2rem;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            opacity: 0.7;
+        }
+        #filter:hover{
+            opacity: 1;
+            cursor: pointer;
+        }
+        .tax-info{
+            display: none;
+        }
+        .tax-toggle{
+            border: 1px solid black;
+            border-radius: 1rem;
+            height: 3.5rem;
+            padding: 1rem;
+            margin-left: 10rem;
+            display: flex;
+            align-items: center;
+        }
+    </style>
+    <body>
+      <div id="filters">
+        <div id="filter">
+            <div><i class="fa-solid fa-fire"></i></div>
+            <p>trending</p>
+        </div>
+        <div id="filter">
+            <div><i class="fa-solid fa-house"></i></div>
+            <p>house</p>
+        </div>
+          <div id="filter">
+            <div><i class="fa-solid fa-mountain-city"></i></div>
+            <p>farms</p>
+        </div>
+          <div id="filter">
+            <div><i class="fa-solid fa-building"></i></div>
+            <p>buildings</p>
+        </div>
+          <div id="filter">
+            <div><i class="fa-solid fa-umbrella"></i></div>
+            <p>beach</p>
+        </div>
+          <div id="filter">
+            <div><i class="fa-solid fa-water-ladder"></i></div>
+            <p>swimming-pool</p>
+        </div>
+          <div id="filter">
+            <div><i class="fa-solid fa-camera-retro"></i></div>
+            <p>shooting</p>
+        </div>
+          <div id="filter">
+            <div><i class="fa-solid fa-wifi"></i></div>
+            <p>Free-wifi</p>
+        </div>
+             <div id="filter">
+            <div><i class="fa-solid fa-face-smile"></i></div>
+            <p>OMG</p>
+        </div>     
+        <div id="filter">
+            <div><i class="fa-solid fa-location-dot"></i></div>
+            <p>everywhere</p>
+        </div>
+        <div class="tax-toggle">
+        <div class="form-check form-switch form-check-reverse">
+            <input class="form-check-input" type="checkbox" role="switch" id="switchCheckDefault">
+            <label class="form-check-label" for="switchCheckDefault">check tax</label>
+        </div>
+        </div>
+      </div>
+    <div class="row row-cols-lg-4 row-cols-md-3 row-cols-sm-2 row-cols-1 g-3">
+
+        <% for(let info of dinfo){ %>
+            <div class="col">
+                <a href="/listing/<%=info._id %>" class="listing-link">
+    
+                        <div class="card card-listing">
+                           <img src="<%= info.image %>" 
+                           class="card-img-top" 
+                           alt="listing_image" 
+                           style="height: 20rem";
+                           />
+                           <div class="card-img-overlay">abc</div>
+                               <div class="card-body">
+                                   <p class="card-text">
+                                       <b> <%=info.title %></b> <br>
+                                        &#8377; <%=info.price.toLocaleString("en-IN") %>/night
+                                        <i class="tax-info"> &nbsp; &nbsp; +18% GST</i>
+                                   </p>
+                               </div>
+                       </div>
+                    </a>
+            </div>
+        <% } %>
+
+    </div>
+        <!-- <ul>
+        title
+        <% for(let info of dinfo){ %>
+            <li class="row-box"> <a href="/listing/<%=info._id %>"><%=info.title %></a></li>
+            <li class="row-box"> <a href="/listing/<%=info._id %>"><%=info.title %></a></li>
+            <% } %>
+    </ul> -->
+
+    </body>
+
+    <script>
+        let taxSwitch = document.getElementById("switchCheckDefault");
+        taxSwitch.addEventListener("click",()=>{
+        let taxinfo = document.getElementsByClassName("tax-info");
+        for(info of taxinfo){
+            if(info.style.display!="inline"){
+                info.style.display = "inline";
+            }
+            else{
+                info.style.display = "none";
+            }
+        }
+        })
+    </script>
