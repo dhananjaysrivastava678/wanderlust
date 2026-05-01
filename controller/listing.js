@@ -41,8 +41,15 @@ module.exports.getReqEdit = async(req,res)=>{   //add here
 
 module.exports.postReqEdit = async (req,res)=>{
     let {id}=req.params;
+
     console.log(req.body);
-    await List.findByIdAndUpdate(id,{...req.body.List});
+        let response = await geocodingClient.forwardGeocode({
+        query: req.body.List.location,
+        limit: 1
+    }).send();
+
+    await List.findByIdAndUpdate(id,{...req.body.List, 
+    geometry: response.body.features[0].geometry });
     req.flash("success", "Edit Accepted");
     res.redirect("/listing");
 }
